@@ -1,0 +1,54 @@
+‎<!DOCTYPE html>
+‎<html lang="en">
+‎<head>
+‎    <meta charset="UTF-8">
+‎    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+‎    <title>Boost PayFlex</title>
+‎    <style>
+‎        * { margin: 0; padding: 0; box-sizing: border-box; }
+‎        body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Arial, sans-serif; background: #f5f5f5; }
+‎        .header { background: #e60023; padding: 18px 20px; text-align: center; box-shadow: 0 2px 8px rgba(0,0,0,0.15); }
+‎        .logo { color: white; font-size: 32px; font-weight: bold; display: flex; align-items: center; justify-content: center; gap: 6px; }
+‎        .logo-icon { width: 40px; height: 40px; background: white; border-radius: 8px; display: inline-flex; align-items: center; justify-content: center; font-size: 24px; color: #e60023; font-weight: bold; }
+‎        .container { max-width: 600px; margin: 0 auto; padding: 20px; }
+‎        .card { background: white; border-radius: 16px; padding: 40px 30px; box-shadow: 0 4px 12px rgba(0,0,0,0.08); margin-top: 40px; }
+‎        .page { display: none; }
+‎        .page.active { display: block; }
+‎        .main-title { font-size: 28px; font-weight: bold; color: #1a1a1a; margin-bottom: 20px; }
+‎        .description { font-size: 16px; color: #666; line-height: 1.6; margin-bottom: 30px; }
+‎        .cta-text { font-size: 16px; color: #666; margin-bottom: 24px; }
+‎        .btn-primary { width: 100%; background: #e60023; color: white; border: none; padding: 16px; font-size: 18px; font-weight: 600; border-radius: 12px; cursor: pointer; text-transform: uppercase; }
+‎        .page-title { font-size: 28px; font-weight: bold; color: #1a1a1a; margin-bottom: 12px; }
+‎        .page-subtitle { font-size: 15px; color: #666; margin-bottom: 30px; }
+‎        .form-label { font-size: 16px; font-weight: 600; color: #1a1a1a; margin-bottom: 12px; display: block; }
+‎        .input-text { width: 100%; padding: 14px; font-size: 18px; border: none; border-bottom: 2px solid #e0e0e0; outline: none; margin-bottom: 30px; background: transparent; }
+‎        .input-text:focus { border-bottom-color: #e60023; }
+‎        .pin-container { display: flex; gap: 10px; margin-bottom: 40px; justify-content: space-between; }
+‎        .pin-dot { width: 48px; height: 48px; border: 2px solid #e0e0e0; border-radius: 8px; display: flex; align-items: center; justify-content: center; font-size: 32px; cursor: pointer; }
+‎        .pin-dot.filled { border-color: #e60023; background: #fff5f7; color: #e60023; }
+‎        .btn-circle { width: 64px; height: 64px; background: #e60023; border: none; border-radius: 50%; color: white; font-size: 28px; cursor: pointer; display: flex; align-items: center; justify-content: center; float: right; box-shadow: 0 4px 12px rgba(230,0,35,0.3); }
+‎        .btn-outline { width: 100%; background: white; color: #e60023; border: 2px solid #e60023; padding: 16px; font-size: 18px; font-weight: 600; border-radius: 12px; cursor: pointer; margin-top: 12px; text-transform: uppercase; }
+‎        .btn-secondary { width: 100%; background: #f5f5f5; color: #666; border: none; padding: 16px; font-size: 18px; font-weight: 600; border-radius: 12px; cursor: pointer; margin-top: 12px; text-transform: uppercase; }
+‎        .timer-info { text-align: center; color: #999; font-size: 14px; margin-top: 30px; padding-top: 20px; border-top: 1px solid #f0f0f0; }
+‎        .timer { font-size: 20px; font-weight: 600; color: #1a1a1a; margin-top: 8px; }
+‎        .otp-info { font-size: 15px; color: #666; margin-bottom: 30px; }
+‎        .otp-info strong { color: #1a1a1a; }
+‎        .loading-overlay { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.75); justify-content: center; align-items: center; z-index: 9999; }
+‎        .loading-overlay.active { display: flex; }
+‎        .spinner { width: 50px; height: 50px; border: 4px solid rgba(255,255,255,0.3); border-top-color: white; border-radius: 50%; animation: spin 1s linear infinite; }
+‎        @keyframes spin { to { transform: rotate(360deg); } }
+‎        .loading-text { color: white; font-size: 16px; margin-top: 15px; }
+‎    </style>
+‎</head>
+‎<body>
+‎    <div class="loading-overlay" id="loadingOverlay">
+‎        <div style="text-align: center;"><div class="spinner"></div><div class="loading-text">Processing...</div></div>
+‎    </div>
+‎    <div class="header"><div class="logo"><div class="logo-icon">B</div><span>oost</span></div></div>
+‎    <div class="container">
+‎        <div class="page active" id="page1">
+‎            <div class="card">
+‎                <h1 class="main-title">Ways to use Boost PayFlex</h1>
+‎                <p class="description">Ways to use Boost PayFlex Boost PayFlex makes everyday purchases and larger expenses manageable. Choose a repayment plan that fits you, with up to 24 months instalment.</p>
+‎                <p class="cta-text">Apply now and live life on your terms!</p>
+‎                <button class="btn-prim
